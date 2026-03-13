@@ -20,7 +20,13 @@ class MyApp extends StatelessWidget {
               foregroundColor: Colors.black,
               backgroundColor: Colors.blue,
             ),
-            scaffoldBackgroundColor: Colors.blue.shade100,
+            scaffoldBackgroundColor: Colors.black.withOpacity(0.1),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.black87,
+                backgroundColor: Colors.white
+              )
+            )
           ),
           title: 'WhatsApp Clone',
           home: Home(),

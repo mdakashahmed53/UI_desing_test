@@ -7,7 +7,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
+      
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -50,7 +50,10 @@ class Home extends StatelessWidget {
 
             // search bar
             child: Container(
+              decoration: BoxDecoration(
               color: Colors.white,
+              borderRadius: BorderRadius.circular(12)
+              ),
               child: TextFormField(
                 textAlign: TextAlign.start,
                 showCursor: true,
@@ -74,7 +77,6 @@ class Home extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
-                  fillColor: Colors.white,
                   prefixIcon: Icon(Icons.search_rounded, size: 25.sp),
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -84,6 +86,28 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                
+                Text('Select your next trip', style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold
+                ),),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  children: [
+                    ElevatedButton(onPressed: (){}, child: Text('Asia'))
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
