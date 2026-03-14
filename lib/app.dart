@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/home.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:whatsapp/login_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -14,6 +15,11 @@ class MyApp extends StatelessWidget {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
+          routes: {
+            '/':(context)=>Home(),
+            '/logInScreen':(context)=>LogIn()
+          },
+          initialRoute: '/logInScreen',
           theme: ThemeData(
             appBarTheme: AppBarThemeData(
               centerTitle: true,
@@ -26,10 +32,20 @@ class MyApp extends StatelessWidget {
                 foregroundColor: Colors.black87,
                 backgroundColor: Colors.white
               )
+            ),
+            inputDecorationTheme: InputDecorationThemeData(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                gapPadding: 5
+              ),
+              hintStyle: TextStyle(
+                fontSize: 14.sp
+              )
             )
           ),
+          
           title: 'WhatsApp Clone',
-          home: Home(),
+          
           debugShowCheckedModeBanner: false,
         );
       },
