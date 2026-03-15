@@ -1,21 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LogIn extends StatefulWidget {
-  const LogIn({super.key});
+class SingupScreen extends StatefulWidget {
+  const SingupScreen({super.key});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SingupScreen> createState() => _SingupScreenState();
 }
 
-class _LogInState extends State<LogIn> {
+class _SingupScreenState extends State<SingupScreen> {
+
   final _fromKey = GlobalKey<FormState>();
   bool showPassword = false;
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController newPasswordController = TextEditingController();
+  TextEditingController cnfPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    
+    void showAlertDialog(){
+       showDialog(
+          context: context, builder: (context)=>AlertDialog(
+        title: Text('⚠️ Warning'),
+        titleTextStyle: TextStyle(
+          fontSize: 25.sp,
+          color: Colors.black
+
+        ),
+        content: Text('New Password or Confirm Password not same'),
+        actions: [
+          TextButton(onPressed: (){
+            Navigator.pop(context);
+          }, child: Text('OK'))
+        ],
+      ),
+        
+      );
+    }
+
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.blueAccent.shade100,
@@ -27,8 +52,8 @@ class _LogInState extends State<LogIn> {
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
-                
+                    padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
+
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.lightBlueAccent,
@@ -39,21 +64,43 @@ class _LogInState extends State<LogIn> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    width: 400,
+                    width: 380,
                     child: Form(
                       key: _fromKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Welcome \nBack!',
+                            'Sing Up',
                             style: TextStyle(
                               fontSize: 35.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                           ),
+                          Text("hello let's join with us",
+                          style: TextStyle(
+                            fontSize: 15.sp
+                          ),),
                           SizedBox(height: 30),
+                          TextFormField(
+                            controller: nameController,
+                            validator: (value) {
+                              if(value == null || value.isEmpty){
+                                return 'Please Input Your Name';
+                              } else {
+                                return null;
+                              }
+                            },
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              hintText: 'Name',
+                              prefixIcon: Icon(Icons.person, size: 18.sp),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 12,
+                          ),
                           TextFormField(
                             controller: emailController,
                             validator: (value) {
@@ -67,14 +114,47 @@ class _LogInState extends State<LogIn> {
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: 'Email or Phone Number',
+                              hintText: 'Email',
                               prefixIcon: Icon(Icons.email, size: 18.sp),
                             ),
                           ),
                           SizedBox(height: 12),
-                
+
                           TextFormField(
-                            controller: passwordController,
+                            controller: newPasswordController,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please input Password';
+                              } else if (value.length < 8) {
+                                return 'Password Must be 8';
+                              } else {
+                                return null;
+                              }
+                            },
+
+                            obscureText: showPassword,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              hintText: 'New Password',
+                              prefixIcon: Icon(Icons.lock, size: 18.sp),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    showPassword = !showPassword;
+                                  });
+                                },
+                                icon: Icon(
+                                  showPassword
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 12),
+
+                          TextFormField(
+                            controller: cnfPasswordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please input Password';
@@ -88,7 +168,7 @@ class _LogInState extends State<LogIn> {
                             obscureText: showPassword,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
-                              hintText: 'Password',
+                              hintText: 'Confirm Password',
                               prefixIcon: Icon(Icons.lock, size: 18.sp),
                               suffixIcon: IconButton(
                                 onPressed: () {
@@ -110,14 +190,21 @@ class _LogInState extends State<LogIn> {
                             height: 40,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (_fromKey.currentState!.validate()) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('LogIn Successful'),
-                                      showCloseIcon: true,
-                                    ),
-                                  );
+
+                                if(newPasswordController.text == cnfPasswordController.text){
+                                  if (_fromKey.currentState!.validate()) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('LogIn Successful'),
+                                        showCloseIcon: true,
+                                      ),
+                                    );
+                                  }
+                                } else {
+                                  showAlertDialog();
                                 }
+
+
                               },
                               child: Text('Log in'),
                             ),
@@ -126,13 +213,14 @@ class _LogInState extends State<LogIn> {
                           Center(
                             child: TextButton(
                               onPressed: () {},
-                              child: Text('Create New Account'),
+                              child: Text('Already have account?'),
                             ),
                           ),
                           Divider(
                             color: Colors.blueGrey,
                             indent: 50,
                             endIndent: 50,
+
                           ),
                         ],
                       ),
@@ -145,5 +233,8 @@ class _LogInState extends State<LogIn> {
         ),
       ),
     );
+
   }
 }
+
+

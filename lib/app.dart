@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp/home.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp/login_screen.dart';
+import 'package:whatsapp/singup_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           routes: {
             '/':(context)=>Home(),
-            '/logInScreen':(context)=>LogIn()
+            '/logInScreen':(context)=>LogIn(),
+            '/singUpScreen':(context)=>SingupScreen()
           },
-          initialRoute: '/logInScreen',
+          initialRoute: '/singUpScreen',
           theme: ThemeData(
             appBarTheme: AppBarThemeData(
               centerTitle: true,
@@ -30,7 +32,10 @@ class MyApp extends StatelessWidget {
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.black87,
-                backgroundColor: Colors.white
+                backgroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
+                )
               )
             ),
             inputDecorationTheme: InputDecorationThemeData(
