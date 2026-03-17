@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             '/logInScreen':(context)=>LogIn(),
             '/singUpScreen':(context)=>SingupScreen()
           },
-          initialRoute: '/singUpScreen',
+          initialRoute: '/',
           theme: ThemeData(
             appBarTheme: AppBarThemeData(
               centerTitle: true,

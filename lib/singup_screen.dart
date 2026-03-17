@@ -160,6 +160,8 @@ class _SingupScreenState extends State<SingupScreen> {
                                 return 'Please input Password';
                               } else if (value.length < 8) {
                                 return 'Password Must be 8';
+                              } else if(newPasswordController.text != cnfPasswordController.text){
+                                return 'Please same password input';
                               } else {
                                 return null;
                               }
@@ -191,28 +193,27 @@ class _SingupScreenState extends State<SingupScreen> {
                             child: ElevatedButton(
                               onPressed: () {
 
-                                if(newPasswordController.text == cnfPasswordController.text){
                                   if (_fromKey.currentState!.validate()) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: Text('LogIn Successful'),
+                                        content: Text('Register Successful'),
                                         showCloseIcon: true,
                                       ),
                                     );
                                   }
-                                } else {
-                                  showAlertDialog();
                                 }
 
 
-                              },
-                              child: Text('Log in'),
+                              ,
+                              child: Text('Register'),
                             ),
                           ),
                           SizedBox(height: 7),
                           Center(
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
                               child: Text('Already have account?'),
                             ),
                           ),

@@ -67,7 +67,7 @@ class _LogInState extends State<LogIn> {
                             },
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              hintText: 'Email or Phone Number',
+                              hintText: 'Email ',
                               prefixIcon: Icon(Icons.email, size: 18.sp),
                             ),
                           ),
@@ -125,7 +125,9 @@ class _LogInState extends State<LogIn> {
                           SizedBox(height: 7),
                           Center(
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/singUpScreen');
+                              },
                               child: Text('Create New Account'),
                             ),
                           ),
