@@ -10,6 +10,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  bool isFavarote = false;
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -35,13 +37,16 @@ class _HomeState extends State<Home> {
                       ),
                       Text(
                         'Welcome to SkyTravel',
-                        style: TextStyle(fontSize: 12.sp, color: Colors.black87),
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: Colors.black87,
+                        ),
                       ),
                     ],
                   ),
-
+    
                   SizedBox(width: 13),
-
+    
                   CircleAvatar(
                     radius: 20.r,
                     backgroundImage: NetworkImage(
@@ -53,12 +58,12 @@ class _HomeState extends State<Home> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-
+    
               // search bar
               child: Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12)
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: TextFormField(
                   textAlign: TextAlign.start,
@@ -68,16 +73,14 @@ class _HomeState extends State<Home> {
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w500,
                     color: Colors.black,
-
                   ),
                   decoration: InputDecoration(
-
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     // label: Text('Search'),
                     hintText: 'Search',
-
+    
                     hintStyle: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -86,76 +89,288 @@ class _HomeState extends State<Home> {
                     prefixIcon: Icon(Icons.search_rounded, size: 25.sp),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.asset('asset/image/filter.png', height: 30.h ,),
+                      child: Image.asset(
+                        'asset/image/filter.png',
+                        height: 30.h,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-
+    
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-                  Text('Select your next trip', style: TextStyle(
+                  Text(
+                    'Select your next trip',
+                    style: TextStyle(
                       fontSize: 16.sp,
-                      fontWeight: FontWeight.bold
-                  ),),
-                  SizedBox(
-                    height: 8.h,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  SizedBox(height: 8.h),
                   // Asia scroll bar
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                        SizedBox(width: 8,),
-                        ElevatedButton(onPressed: (){}, child: Text('Asia')),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                          SizedBox(width: 8),
+                          ElevatedButton(onPressed: () {}, child: Text('Asia')),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: 20.h,),
-
+                  SizedBox(height: 20.h),
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 300.h,
-                  width: 300.w,
-                  decoration: BoxDecoration(
+    
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+    
+                  Container(
+                    height: 300.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
                       color: Colors.black87,
                       borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(image: NetworkImage('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKgVQ8UwYP8P0Gpk8RYnoGnOO_iwESqO-ZQ&s',), fit: BoxFit.cover)
-                  ),
-                  child: Stack(
-
-                    children: [
-
-                      Positioned(
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKgVQ8UwYP8P0Gpk8RYnoGnOO_iwESqO-ZQ&s',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned(
                           right: 12,
                           top: 12,
-                          child: IconButton(onPressed: (){}, icon: Icon(Icons.favorite, size: 40, color: Colors.red,)))
-                    ],
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavarote = !isFavarote;
+                              });
+                            },
+                            icon: isFavarote
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 40,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 40,
+                                    color: Colors.amberAccent,
+                                  ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 15,
+                          left: 15,
+                          child: SizedBox(
+                            height: 40,
+                            width: 350,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text('See More'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                )
-              ],
-            )
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Container(
+                    height: 300.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKgVQ8UwYP8P0Gpk8RYnoGnOO_iwESqO-ZQ&s',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          right: 12,
+                          top: 12,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavarote = !isFavarote;
+                              });
+                            },
+                            icon: isFavarote
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 40,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 40,
+                                    color: Colors.amberAccent,
+                                  ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 15,
+                          left: 15,
+                          child: SizedBox(
+                            height: 40,
+                            width: 350,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text('See More'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    
+                  ),
+
+                  SizedBox(width: 30,),
+
+                  Container(
+                    height: 300.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKgVQ8UwYP8P0Gpk8RYnoGnOO_iwESqO-ZQ&s',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          right: 12,
+                          top: 12,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavarote = !isFavarote;
+                              });
+                            },
+                            icon: isFavarote
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 40,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 40,
+                                    color: Colors.amberAccent,
+                                  ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 15,
+                          left: 15,
+                          child: SizedBox(
+                            height: 40,
+                            width: 350,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text('See More'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(width: 30),
+                  Container(
+                    height: 300.h,
+                    width: 300.w,
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      borderRadius: BorderRadius.circular(30),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYKgVQ8UwYP8P0Gpk8RYnoGnOO_iwESqO-ZQ&s',
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          right: 12,
+                          top: 12,
+                          child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                isFavarote = !isFavarote;
+                              });
+                            },
+                            icon: isFavarote
+                                ? Icon(
+                                    Icons.favorite,
+                                    size: 40,
+                                    color: Colors.red,
+                                  )
+                                : Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 40,
+                                    color: Colors.amberAccent,
+                                  ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 15,
+                          left: 15,
+                          child: SizedBox(
+                            height: 40,
+                            width: 350,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: Text('See More'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              
+                  
+                ],
+              ),
+            ),
           ],
         ),
       ),
